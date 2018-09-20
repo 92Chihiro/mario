@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mario</title>
+  <meta charset="utf-8" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+  $(document).ready(function () {
+    var next_pic = '';
+    $(window).keydown(function(e){
+      var current_pic = $('#mario_pic').attr('src');
+      var margin = parseInt($('#mario').css('margin-left'), 10);
+
+      //moves left
+      if (e.keyCode == 37) {
+        if (current_pic == 'mario_4.png') {
+          next_pic = 'mario_5.png';
+        } else if (current_pic == 'mario_5.png') {
+          next_pic = 'mario_6.png'
+        } else if (current_pic == 'mario_6.png') {
+          next_pic = 'mario_4.png';
+        } else {
+          next_pic = 'mario_4.png';
+        }
+        $('#mario_pic').attr('src', next_pic);
+
+        if (margin >= -580) {
+          $('#mario').animate({
+            'marginLeft' : '-=20px'
+          }).finish();
+        }
+
+
+        //moves right
+      } else if (e.keyCode == 39) {
+        if (current_pic == 'mario_1.png') {
+          next_pic = 'mario_2.png';
+        } else if (current_pic == 'mario_2.png') {
+          next_pic = 'mario_3.png'
+        } else if (current_pic == 'mario_3.png') {
+          next_pic = 'mario_1.png';
+        } else {
+          next_pic = 'mario_1.png';
+        }
+        $('#mario_pic').attr('src', next_pic);
+
+        if (margin <= 560) {
+          $('#mario').animate({
+            'marginLeft' : '+=20px'
+          }).finish();
+        }
+      }
+
+    });
+  });
+  </script>
+
+  <style>
+  #container {
+    width: 100%;
+    height: 600px;
+  }
+
+  #mario {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align:center;
+  }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="mario">
+      <img id="mario_pic" src="mario_1.png"/>
+    </div>
+  </div>
+</body>
+</html>
